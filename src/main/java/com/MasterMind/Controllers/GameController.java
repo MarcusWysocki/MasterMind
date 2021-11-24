@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/game")
+@RequestMapping("/api")
 public class GameController {
 
     private final GameDao dao;
@@ -23,13 +23,13 @@ public class GameController {
         return dao.getAll();
     }
 
-    @PostMapping
+    @PostMapping("/begin")
     @ResponseStatus(HttpStatus.CREATED)
     public Game create(@RequestBody Game game) {
         return dao.add(game);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/game/{id}")
     public ResponseEntity<Game> findById(@PathVariable int id) {
         Game result = dao.findById(id);
         if (result == null) {
