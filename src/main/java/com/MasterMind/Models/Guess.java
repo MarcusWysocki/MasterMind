@@ -5,7 +5,7 @@ public class Guess {
     private int id;
     private int gameId;
     private int[] guess; //The [4] array containing the actual guess
-    private int[] result; // the [2] array containing exact and partial
+    private String result; // the [2] array containing exact and partial
     private String time;
 
     public int getId() {
@@ -32,11 +32,11 @@ public class Guess {
         this.guess = guess;
     }
 
-    public int[] getResult() {
+    public String getResult() {
         return result;
     }
 
-    public void setResult(int[] result) {
+    public void setResult(String result) {
         this.result = result;
     }
 

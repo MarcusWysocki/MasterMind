@@ -36,8 +36,8 @@ public class Game {
         return noGuesses;
     }
 
-    public void setNoGuesses(int noGuesses) {
-        this.noGuesses = noGuesses;
+    public void incNoGuesses() {
+        this.noGuesses++;
     }
 
     public int[] getAnswer() {
