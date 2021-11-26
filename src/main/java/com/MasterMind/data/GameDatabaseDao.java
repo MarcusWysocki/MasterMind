@@ -73,7 +73,7 @@ public class GameDatabaseDao implements GameDao {
     @Override
     public Game findById(int id) {
 
-        final String sql = "SELECT GameId, TimeStarted, Completed, NoGuesses, Answer"
+        final String sql = "SELECT GameId, TimeStarted, Completed, NoGuesses, Answer "
                 + "FROM games WHERE GameId = ?;";
 
         return jdbcTemplate.queryForObject(sql, new GameMapper(), id);
@@ -82,17 +82,22 @@ public class GameDatabaseDao implements GameDao {
     @Override
     public boolean update(Game game) {
 
-        final String sql = "UPDATE game SET"
-                + "timeStarted = ?, "
-                + "completed = ?, "
-                + "noGuesses = ?, "
-                + "answer = ?;";
+        final String sql = "UPDATE games SET "
+                + "TimeStarted = ?, "
+                + "Completed = ?, "
+                + "NoGuesses = ?, "
+                + "Answer = ? "
+                + "WHERE GameId = ?;";
+
+        int[] answer = game.getAnswer();
+        int ans = answer[0] * 1000 + answer[1] * 100 + answer[2] * 10 + answer[3];
 
         return jdbcTemplate.update(sql,
                 game.getTimeStarted(),
                 game.isCompleted(),
                 game.getNoGuesses(),
-                game.getAnswer()) > 0;
+                ans,
+                game.getId()) > 0;
     }
 
     @Override
@@ -131,13 +136,13 @@ public class GameDatabaseDao implements GameDao {
         @Override
         public Game mapRow(ResultSet rs, int index) throws SQLException {
             Game game = new Game();
-            game.setId(rs.getInt("id"));
-            game.setTimeStarted(rs.getString("timeStarted"));
-            game.setCompleted(rs.getBoolean("completed"));
-            game.setNoGuesses(rs.getInt("noGuesses"));
+            game.setId(rs.getInt("GameId"));
+            game.setTimeStarted(rs.getString("TimeStarted"));
+            game.setCompleted(rs.getBoolean("Completed"));
+            game.setNoGuesses(rs.getInt("NoGuesses"));
 
             int[] ans = {0,0,0,0};
-            int rawAns = rs.getInt("answer");
+            int rawAns = rs.getInt("Answer");
             for (int i = 0; i < 4; i++) {
                 ans[3-i] = rawAns%10;
                 rawAns = (rawAns - (rawAns%10))/10;

@@ -5,6 +5,7 @@ import com.MasterMind.Models.Game;
 import com.MasterMind.Models.Guess;
 import com.MasterMind.data.GuessDao;
 import java.util.List;
+import java.lang.Math;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -71,13 +72,18 @@ public class GameController {
         return guessDao.getAll();
     }
 
-    @GetMapping("/rounds/{gameId}")
+    /**@GetMapping("/rounds/{gameId}")
     public ResponseEntity<List<Guess>> findByGameId(@PathVariable int id) {
         List<Guess> results = guessDao.findByGameId(id);
         if (results == null) {
             return new ResponseEntity(null, HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<List<Guess>>(results, HttpStatus.OK);
+    }*/
+
+    @GetMapping("/rounds/{id}")
+    public List<Guess> findByGameId(@PathVariable int id) {
+        return guessDao.findByGameId(id);
     }
 
 

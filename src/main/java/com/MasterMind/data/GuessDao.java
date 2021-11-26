@@ -10,8 +10,6 @@ public interface GuessDao {
 
     List<Guess> getAll();
 
-    Guess findById(int id);
-
     List<Guess> findByGameId(int id);
 
     boolean update(Guess guess);

@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Repository;
 
-@Repository
+
 public class GuessInMemDao implements GuessDao{
 
     static DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
@@ -34,14 +34,6 @@ public class GuessInMemDao implements GuessDao{
     @Override
     public List<Guess> getAll() {
         return new ArrayList<>(guesses);
-    }
-
-    @Override
-    public Guess findById(int id) {
-        return guesses.stream()
-                .filter(i -> i.getId() == id)
-                .findFirst()
-                .orElse(null);
     }
 
     @Override
