@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 import java.util.Random;
 import org.springframework.stereotype.Repository;
 
-@Repository
+
 public class GameInMemDao implements GameDao {
 
 
@@ -73,7 +73,8 @@ public class GameInMemDao implements GameDao {
         return games.removeIf(i -> i.getId() == id);
     }
 
-    private int[] generateAns() {
+    @Override
+    public int[] generateAns() {
         int[] used = {0,0,0,0,0,0,0,0,0,0};
         int[] ans = {0,0,0,0};
 
@@ -85,7 +86,8 @@ public class GameInMemDao implements GameDao {
         return ans;
     }
 
-    private int randomNum(int[] used) {
+    @Override
+    public int randomNum(int[] used) {
         Random rand = new Random();
         int num = rand.nextInt(10);
 

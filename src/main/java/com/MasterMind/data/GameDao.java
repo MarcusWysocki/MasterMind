@@ -16,4 +16,8 @@ public interface GameDao {
 
     //True if item exists and is deleted
     boolean deleteById(int id);
+
+    int[] generateAns();
+
+    int randomNum(int[] used);
 }

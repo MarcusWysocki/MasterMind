@@ -36,6 +36,8 @@ public class Game {
         return noGuesses;
     }
 
+    public void setNoGuesses(int guesses) {this.noGuesses = guesses;}
+
     public void incNoGuesses() {
         this.noGuesses++;
     }
@@ -46,5 +48,12 @@ public class Game {
 
     public void setAnswer(int[] answer) {
         this.answer = answer;
+    }
+
+    public String getString() {
+        int ans = answer[0] * 1000 + answer[1] * 100 + answer[2] * 10 + answer[3];
+        String ret = id + "," + timeStarted + "," + completed + "," + noGuesses + "," + ans;
+
+        return ret;
     }
 }
